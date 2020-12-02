@@ -16,12 +16,14 @@ public class Passwords {
 
     public static void main(String[] args) {
         System.out.println(splitObject(readFile()));
+        System.out.println("Size of list: " + splitObject(readFile()).size());
     }
 
-    public static String splitObject(ArrayList passwords){
+    public static ArrayList<String> splitObject(ArrayList passwords){
         String regex = "";
         String letter = "";
         String password = "";
+        validPasswords = new ArrayList<String>();
         for (int i=0; i<passwords.size(); i++){
             String singlePassword = (String)passwords.get(i);
             String[] strArray =  singlePassword.split(" ");
@@ -38,16 +40,28 @@ public class Passwords {
                 }
             }
             password = password.replace(":", "");
+            String strippedPassword = stripPassword(password, letter);
             Pattern p = Pattern.compile(letter+"{"+regex+"}");
-            Matcher m = p.matcher(password);
+            Matcher m = p.matcher(strippedPassword);
             boolean b = m.matches();
             if(b){
-                System.out.println(password);
+                //System.out.println(password);
+                validPasswords.add(password);
             }
+
         }
 
+        return validPasswords;
+    }
 
-        return (String)passwords.get(0);
+    public static String stripPassword(String password, String letter){
+        String matchedLetters = "";
+        for (char character: password.toCharArray()) {
+            if(character==letter.charAt(0)){
+                matchedLetters += character;
+            }
+        }
+        return matchedLetters;
     }
 
     public static ArrayList readFile(){
