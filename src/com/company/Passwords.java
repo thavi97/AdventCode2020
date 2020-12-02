@@ -15,15 +15,54 @@ public class Passwords {
     private static ArrayList<String> validPasswords;
 
     public static void main(String[] args) {
-        System.out.println(splitObject(readFile()));
-        System.out.println("Size of list: " + splitObject(readFile()).size());
+        //System.out.println(findValidPasswordsInRange(readFile()));
+        //System.out.println("Size of list: " + findValidPasswordsInRange(readFile()).size());
+
+        System.out.println(findOnePosition(readFile()));
+        System.out.println("Size of list: " + findOnePosition(readFile()).size());
+
+    }
+
+    /*
+        Finds a password where the target letter is only in one position of the String.
+     */
+    public static ArrayList<String> findOnePosition(ArrayList passwords){
+        String[] numberRange = new String[2];
+        String letter = "";
+        String password = "";
+        validPasswords = new ArrayList<String>();
+        for (int i=0; i<passwords.size(); i++){
+            String singlePassword = (String)passwords.get(i);
+            String[] strArray =  singlePassword.split(" ");
+            for(int j=0; j<strArray.length; j++){
+                if (j == 0) {
+                    numberRange = strArray[j].split("-");
+                    //System.out.println("Password " + i + " " + numberRange);
+                }else if(j == 1){
+                    letter = strArray[j].replace(":", "");
+                    //System.out.println("Password " + i + " " + letter);
+                }else{
+                    password = strArray[j].replace(":", "");
+                    //System.out.println("Password " + i + " " + password);
+                }
+            }
+            password = password.replace(":", "");
+            char firstChar = password.charAt(Integer.parseInt(numberRange[0])-1);
+            char secondChar = password.charAt(Integer.parseInt(numberRange[1])-1);
+            if(firstChar!=secondChar){
+                if(firstChar == letter.charAt(0) || secondChar == letter.charAt(0)){
+                    validPasswords.add(password);
+                }
+            }
+        }
+        return validPasswords;
     }
 
     /*
         Split the object to separate the number range, the letter, and the password.
         Then check using Regex whether the password is valid.
      */
-    public static ArrayList<String> splitObject(ArrayList passwords){
+    public static ArrayList<String> findValidPasswordsInRange(ArrayList passwords){
         String regex = "";
         String letter = "";
         String password = "";
