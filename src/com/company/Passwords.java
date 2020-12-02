@@ -19,6 +19,10 @@ public class Passwords {
         System.out.println("Size of list: " + splitObject(readFile()).size());
     }
 
+    /*
+        Split the object to separate the number range, the letter, and the password.
+        Then check using Regex whether the password is valid.
+     */
     public static ArrayList<String> splitObject(ArrayList passwords){
         String regex = "";
         String letter = "";
@@ -54,6 +58,10 @@ public class Passwords {
         return validPasswords;
     }
 
+    /*
+        Strips the password so it only leaves behind the letters required.
+        This is because regex in Java searches for multiple occurrences of a letter in a sequence.
+     */
     public static String stripPassword(String password, String letter){
         String matchedLetters = "";
         for (char character: password.toCharArray()) {
