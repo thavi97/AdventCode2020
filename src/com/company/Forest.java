@@ -22,8 +22,6 @@ public class Forest {
         int x=0;
         int y=0;
         int counter = 0;
-        System.out.println(numberOfRows);
-        System.out.println((numberOfColumns*numberOfRepeats)+1);
         while(y<numberOfRows-1){
             x += right;
             y += down;
@@ -36,9 +34,9 @@ public class Forest {
 
     public static int[][] duplicateForest(int[][] mapOfForest) throws FileNotFoundException {
         Scanner forest = new Scanner(new File("forest.txt"));
-        numberOfRepeats = ((numberOfRows/numberOfColumns)*(right+1));
-        int[][] duplicateMapOfForest = new int[numberOfRows][numberOfColumns*numberOfRepeats];
-        for (int j = 0; j < numberOfRows; j++) {
+        numberOfRepeats = ((numberOfRows/numberOfColumns)*(right+1)*down);
+        int[][] duplicateMapOfForest = new int[numberOfRows*down][numberOfColumns*numberOfRepeats];
+        for (int j = 0; j < numberOfRows*down; j++) {
             int u=0;
             if (forest.hasNextLine()) {
                 char[] nextLine = forest.nextLine().toCharArray();
