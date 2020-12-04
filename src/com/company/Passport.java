@@ -35,7 +35,6 @@ public class Passport {
             }
         }
 
-        ArrayList<String> listOfKeys = new ArrayList();
         int validPassports = 0;
         for (String passport: arrayListOfPassports) {
             int counter = 0;
@@ -84,21 +83,16 @@ public class Passport {
                         break;
                     case "pid":
                         if(value.length()==9){
-                            System.out.println(value);
                             counter++;
                         }
                         break;
                 }
-                //System.out.print(key);
             }
-            System.out.println();
             if(counter>=7){
                 validPassports++;
             }
         }
-
         System.out.println(validPassports);
     }
-
 
 }
